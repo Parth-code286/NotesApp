@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS (optional) -->
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body class="bg-zinc-900 min-h-screen p-4 text-white">
+
+  <div class="main w-full">
+
+    <!-- Task Submission Form -->
+    <form action="/create" method="POST" class="w-full max-w-xl mx-auto bg-zinc-800 p-4 rounded-lg shadow-md mt-8">
+      <input
+        type="text"
+        name="title"
+        placeholder="Enter Your Task Title"
+        class="w-full p-2 mb-4 rounded-md bg-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        required
+      />
+      
+      <textarea
+        name="taskDetails"
+        placeholder="Enter Your Task Details"
+        class="w-full p-2 mb-4 rounded-md bg-zinc-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        required
+      ></textarea>
+      
+      <input
+        type="submit"
+        value="Create Task"
+        class="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer"
+      />
+    </form>
+
+    <!-- Task List (Now Below the Form) -->
+    <% if (files && files.length > 0) { %>
+      <% files.forEach(function(val) { %>
+        <div class="task w-full max-w-xl mx-auto mt-6 bg-zinc-800 p-4 rounded-lg shadow-md hover:shadow-lg hover:scale-[1.01] transition-all duration-300">
+          <h1 class="text-xl font-semibold text-white mb-2"><%= val %></h1>
+          <div class="buttons justify-between flex ">
+          <a class="inline-block text-yellow-400 hover:text-yellow-500 font-medium transition duration-200" href='./files/<%= val %>'>Read More →</a>
+          <a class="inline-block text-zinc-400 hover:text-yellow-500 font-medium transition duration-200" href='./edit/<%= val %>'>Edit</a>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <h2 class="text-center text-lg font-medium text-gray-400 mt-10">No Tasks Yet</h2>
+    <% } %>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <script src="/javascripts/script.js"></script>
+</body>
+</html>
